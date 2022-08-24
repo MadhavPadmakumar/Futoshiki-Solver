@@ -2,6 +2,7 @@ using namespace std;
 #include <iostream>
 #include <vector>
 #include <ranges>
+#include <map>
 
 bool solve(const int n, std::vector<std::vector<int>> &puzzle);
 bool is_valid(const int n, int row, int col, int val, const std::vector<std::vector<int>> &puzzle);
@@ -14,13 +15,15 @@ int main() {
 	// Initalise an empty nxn Latin square.
 	std::vector<std::vector<int>> puzzle(n, std::vector<int>(n, 0));
 
-	// Generate and attempt to solve all possible Futoshikis of order n.
-	std::vector<std::vector<int>> inequalities;
+	// Generate and all possible Futoshikis of order n with n-1 constraints.
+	std::vector<std::vector<int>> constraints;
+	std::vector<std::vector<int>> allConstraints;
+	generate_constraints(n, allConstraints);
 
-	// iterate through ordered pairs
+	// Attempt to solve all possible Futoshikis of order n with n-1 constraints.
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < n; j++) {
-			while(inequalities.size() < n - 1) {
+			while(constraints.size() < n - 1) {
 				
 			}
 		}
@@ -84,4 +87,23 @@ bool is_valid(const int n, int row, int col, int val, const std::vector<std::vec
 	}
 	
 	return true;
+}
+
+void generate_constraints(const int n, std::vector<std::vector<int>> &constraints) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (i != 0) {
+				constraints.push_back({i, j, i - 1, j});
+			}
+			if(j != 0) {
+				constraints.push_back({i, j, i, j - 1});
+			}
+			if(i != n - 1) {
+				constraints.push_back({i, j, i + 1, j});
+			}
+			if(j != n - 1) {
+				constraints.push_back({i, j, i, j + 1});
+			}
+		}
+	}
 }
