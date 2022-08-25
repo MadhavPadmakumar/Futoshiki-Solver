@@ -15,7 +15,7 @@ enhanced with constraint-satisfaction logic. Namely, keeping track of all the po
 and gradually ruling them out. Space complexity should be kept in mind when doing this; for example, making a 
 copy of the possibilities for each step of the recursion tree would probably result in a heap crash.
 
-2. Remove reduntant Futoshikis. Some Futoshiki puzzles are equivalent to each other; e.g. flipping or 
+2. Remove redundant Futoshikis. Some Futoshiki puzzles are equivalent to each other; e.g. flipping or 
 rotating along the centre of the grid, or inverting all the inequalities. If I can find a way of efficiently
 categorising "equivalence classes" of Futoshiki, I can reduce the work by a factor of 32.
 
